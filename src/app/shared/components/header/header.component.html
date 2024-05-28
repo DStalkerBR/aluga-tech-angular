@@ -3,6 +3,10 @@
   <span class="spacer"></span>
   <button mat-button type="button" routerLink="/home">Home</button>
   <button mat-button type="button" routerLink="/devices">Devices</button>
-  <button mat-button type="button" routerLink="/login">Login</button>
-  <button mat-button type="button" routerLink="/register">Register</button>
+  <ng-container *ngIf="isUserAuthenticated; else loginButton">
+    <button mat-button (click)="logout()">Logout</button>
+  </ng-container>
+  <ng-template #loginButton>
+    <button mat-button (click)="openLoginDialog()">Login</button>
+  </ng-template>
 </mat-toolbar>

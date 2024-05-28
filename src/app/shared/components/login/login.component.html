@@ -1,0 +1,55 @@
+<div class="login-container">
+  <h2>{{ isRegistering ? "Registrar-se" : "Login" }}</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Email"
+      />
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        O email é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+        Por favor, insira um email válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        placeholder="Senha"
+      />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        A senha é obrigatória.
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+        A senha deve ter pelo menos 6 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >
+      {{ isRegistering ? "Registrar" : "Login" }}
+    </button>
+  </form>
+
+  <ng-container *ngIf="isRegistering; else loginMode">
+    <p>Já tem uma conta?</p>
+    <button mat-button (click)="toggleMode()">Fazer Login</button>
+  </ng-container>
+
+  <ng-template #loginMode>
+    <p>Não tem uma conta?</p>
+    <button mat-button (click)="toggleMode()">Registrar-se</button>
+  </ng-template>
+</div>

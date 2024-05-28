@@ -1,3 +1,18 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { DeviceDetailComponent } from './shared/components/device-detail/device-detail.component';
+import { DeviceEditComponent } from './shared/components/device-edit/device-edit.component';
+import { NgModule } from '@angular/core';
+import { DeviceListComponent } from './shared/components/device-list/device-list.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+    { path: 'devices', component: DeviceListComponent },
+    { path: 'devices/:id/edit', component: DeviceEditComponent },
+    { path: 'devices/:id', component: DeviceDetailComponent },
+    { path: '', redirectTo: '/devices', pathMatch: 'full' },
+];
+
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+})
+export class AppRoutingModule { }

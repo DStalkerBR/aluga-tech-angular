@@ -1,0 +1,15 @@
+<!-- src/app/device-detail/device-detail.component.html -->
+<div *ngIf="device">
+    <h2>Detalhes do {{ device.name }}</h2>
+    <div>
+      <label>ID:</label> {{ device.id }}
+    </div>
+    <div>
+      <label>Nome:</label> {{ device.name }}
+    </div>
+    <div>
+      <label>Status:</label> {{ device.status }}
+    </div>
+    <button (click)="goBack()">Voltar</button>
+  </div>
+  

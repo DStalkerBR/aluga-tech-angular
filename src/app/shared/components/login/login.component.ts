@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private dialogRef: MatDialogRef<LoginComponent>
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -50,13 +52,37 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
     if (this.isRegistering) {
-      this.authService.cadastrarUser(email, password).subscribe(() => {
-        this.dialogRef.close();
-      });
+      this.authService.cadastrarUser(email, password).subscribe(
+        () => {
+          this.snackBar.open('Registro realizado com sucesso!', 'Fechar', {
+            duration: 3000,
+          });
+          this.dialogRef.close();
+        },
+        (error) => {
+          this.snackBar.open('Erro ao registrar. Tente novamente.', 'Fechar', {
+            duration: 3000,
+          });
+        }
+      );
     } else {
-      this.authService.login(email, password).subscribe(() => {
-        this.dialogRef.close();
-      });
+      this.authService.login(email, password).subscribe(
+        () => {
+          this.snackBar.open('Login realizado com sucesso!', 'Fechar', {
+            duration: 3000,
+          });
+          this.dialogRef.close();
+        },
+        (error) => {
+          this.snackBar.open(
+            'Erro ao fazer login. Verifique suas credenciais.',
+            'Fechar',
+            {
+              duration: 3000,
+            }
+          );
+        }
+      );
     }
   }
 

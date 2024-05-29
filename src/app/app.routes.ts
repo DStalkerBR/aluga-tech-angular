@@ -9,7 +9,6 @@ export const routes: Routes = [
   { path: 'devices', component: DeviceListComponent },
   { path: 'devices/:id/edit', component: DeviceEditComponent },
   { path: 'devices/:id', component: DeviceDetailComponent },
-  { path: '', redirectTo: '/devices', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: '**', redirectTo: '' },

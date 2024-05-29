@@ -9,7 +9,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',,
+  styleUrl: './app.component.css',
   template: `
     <h1>Device Management System</h1>
     <nav>

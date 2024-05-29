@@ -3,7 +3,7 @@
     <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
       <div>
         <label for="id">ID</label>
-        <input id="id" formControlName="id" disabled />
+        <input id="id" formControlName="id" [disabled]="true" />
       </div>
       <div>
         <label for="name">Nome</label>
@@ -20,4 +20,3 @@
       <button type="button" (click)="goBack()">Cancelar</button>
     </form>
   </div>
-  

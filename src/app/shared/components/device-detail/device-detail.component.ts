@@ -21,8 +21,8 @@ export class DeviceDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.deviceService.getDeviceById(id).subscribe(device => {
+    const id = (this.route.snapshot.paramMap.get('id'));
+    this.deviceService.getDeviceById(id!).subscribe(device => {
       this.device = device;
     });
   }

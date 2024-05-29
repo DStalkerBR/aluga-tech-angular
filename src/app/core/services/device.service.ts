@@ -1,39 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Device } from '../../models/interfaces/device.model';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { DatabaseService } from './database.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+export class DeviceService extends DatabaseService<Device> {
 
-export class DeviceService {
-  private devices: Device[] = [
-    { id: 1, name: 'Device 1', status: 'available' },
-    { id: 2, name: 'Device 2', status: 'rented' },
-    { id: 3, name: 'Device 3', status: 'available' },
-  ];
+  constructor(http: HttpClient) {
+    super(http, 'devices');
+  }
 
-  constructor() {}
+  addDevice(newDevice: Device): Observable<any> {
+    return this.post(newDevice);
+  }
 
   getDevices(): Observable<Device[]> {
-    return of(this.devices);
+    return this.getAll().pipe(
+      map((data) =>
+        Object.entries(data).map(([key, value]) => ({ ...value, id: key }))
+      )
+    );
   }
 
-  getDeviceById(id: number): Observable<Device> {
-    const device = this.devices.find(device => device.id === id);
-    return of(device!);
+  getDeviceById(id: string): Observable<any> {
+    return this.get(id).pipe(
+      map((data) => ({ ...data, id }))
+    );
   }
 
-  updateDevice(updatedDevice: Device): Observable<void> {
-    const index = this.devices.findIndex(device => device.id === updatedDevice.id);
-    if (index !== -1) {
-      this.devices[index] = updatedDevice;
-    }
-    return of();
+  updateDevice(updatedDevice: Device): Observable<any> {
+    return this.put(updatedDevice.id, updatedDevice);
   }
 
-  deleteDevice(id: number): Observable<void> {
-    this.devices = this.devices.filter(device => device.id !== id);
-    return of();
+  deleteDevice(id: string): Observable<any> {
+    return this.delete(id);
   }
 }

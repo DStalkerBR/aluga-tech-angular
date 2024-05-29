@@ -1,5 +1,5 @@
 export interface Device {
-    id: number;
+    id: string;
     name: string;
     status: 'available' | 'rented';
   }

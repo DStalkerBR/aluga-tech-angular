@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './device-list.component.html',
-  styleUrl: './device-list.component.css'
+  styleUrl: './device-list.component.css',
 })
 export class DeviceListComponent implements OnInit {
   devices: Device[] = [];
@@ -22,13 +22,24 @@ export class DeviceListComponent implements OnInit {
     });
   }
 
-  editDevice(id: number): void {
+  editDevice(id: string): void {
     this.router.navigate(['/devices', id, 'edit']);
   }
 
-  deleteDevice(id: number): void {
+  deleteDevice(id: string): void {
     this.deviceService.deleteDevice(id).subscribe(() => {
-      this.devices = this.devices.filter(device => device.id !== id);
+      this.devices = this.devices.filter((device) => device.id !== id);
     });
+  }
+
+  // This method is only used for testing purposes
+  testAddDevice(): void {
+    this.deviceService
+      .addDevice({
+        id: '',
+        name: 'Device ' + Math.floor(Math.random() * 100),
+        status: Math.random() > 0.5 ? 'available' : 'rented',
+      })
+      .subscribe();
   }
 }

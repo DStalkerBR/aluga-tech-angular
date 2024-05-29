@@ -1,0 +1,79 @@
+.product-details-card {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+}
+
+.product-image {
+  width: 300px;
+  height: 300px;
+  margin-right: 20px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.details-header {
+  flex: 1;
+}
+
+.details-item {
+  margin-bottom: 10px;
+}
+
+.status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.available {
+  background-color: #4caf50; /* Verde para Disponível */
+}
+
+.rented {
+  background-color: #f44336; /* Vermelho para Alugado */
+}
+
+.maintenance {
+  background-color: #ff9800; /* Laranja para Manutenção */
+}
+
+.rental-price {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.available-dates {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.available-dates span {
+  margin-right: 5px;
+}
+
+.description {
+  margin-top: 20px;
+}
+
+.actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

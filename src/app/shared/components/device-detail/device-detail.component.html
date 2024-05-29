@@ -1,14 +1,42 @@
-<!-- src/app/device-detail/device-detail.component.html -->
-<div *ngIf="device">
-    <h2>Detalhes do {{ device.name }}</h2>
-    <div>
-      <label>ID:</label> {{ device.id }}
+<mat-card class="product-details-card">
+  <mat-card-header>
+    <div mat-card-avatar class="product-image">
+      <img [src]="device.imageUrl" alt="Imagem do dispositivo" />
     </div>
-    <div>
-      <label>Nome:</label> {{ device.name }}
+    <div class="details-header">
+      <mat-card-title>{{ device.name }}</mat-card-title>
+      <div class="details-info">
+        <div
+          class="details-item status"
+          [ngClass]="{
+            available: device.status === 'available',
+            rented: device.status === 'rented',
+            maintenance: device.status === 'maintenance'
+          }"
+        >
+          {{ device.status === 'available' ? 'Disponível' : device.status === 'rented' ? 'Alugado' : 'Em Manutenção' }}
+        </div>
+        <div class="details-item rental-price">
+          Preço de Aluguel: R$ {{ device.rentalPrice.toFixed(2) }}
+        </div>
+        <div class="details-item available-dates">
+          <span>Disponível:</span>
+          <span>{{ device.availableFrom | date : "mediumDate" }}</span> -
+          <span>{{ device.availableTo | date : "mediumDate" }}</span>
+        </div>
+        <div class="actions">
+        <mat-card-actions>
+          <button mat-flat-button color="primary" (click)="goBack()">Voltar</button>
+          <button *ngIf="device.status === 'available'" mat-flat-button color="accent" (click)="goBack()">Alugar</button>
+        </mat-card-actions>
+        </div>
+      </div>
     </div>
-    <div>
-      <label>Status:</label> {{ device.status }}
+  </mat-card-header>
+  <mat-card-content>
+    <div class="details-item description">
+      <label>Descrição:</label>
+      <p>{{ device.description }}</p>
     </div>
-    <button (click)="goBack()">Voltar</button>
-  </div>
+  </mat-card-content>
+</mat-card>

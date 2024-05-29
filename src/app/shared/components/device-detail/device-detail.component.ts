@@ -3,16 +3,18 @@ import { Device } from '../../../models/interfaces/device.model';
 import { DeviceService } from '../../../core/services/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-device-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule],
   templateUrl: './device-detail.component.html',
   styleUrl: './device-detail.component.css'
 })
 export class DeviceDetailComponent implements OnInit {
-  device: Device | undefined;
+  device!: Device;
 
   constructor(
     private route: ActivatedRoute,

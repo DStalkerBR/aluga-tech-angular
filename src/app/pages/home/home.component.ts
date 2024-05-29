@@ -7,11 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../shared/components/login/login.component';
 import { AuthService } from '../../core/services/auth.service';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
     CommonModule,
     MatToolbarModule,
     MatButtonModule,

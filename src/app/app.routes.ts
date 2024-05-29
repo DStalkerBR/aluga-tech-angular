@@ -6,11 +6,11 @@ import { NgModule } from '@angular/core';
 import { DeviceListComponent } from './shared/components/device-list/device-list.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'devices', component: DeviceListComponent },
   { path: 'devices/:id/edit', component: DeviceEditComponent },
   { path: 'devices/:id', component: DeviceDetailComponent },
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
   { path: '**', redirectTo: '' },
 ];
 

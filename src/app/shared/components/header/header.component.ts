@@ -6,11 +6,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 import { DeviceDetailComponent } from './shared/components/device-detail/device-detail.component';
 import { DeviceEditComponent } from './shared/components/device-edit/device-edit.component';
 import { NgModule } from '@angular/core';
@@ -16,3 +17,8 @@ export const routes: Routes = [
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '**', redirectTo: '' },
+];

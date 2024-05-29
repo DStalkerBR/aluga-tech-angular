@@ -1,0 +1,50 @@
+.container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.device-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.device-card {
+  margin: 10px;
+  width: 300px;
+}
+
+.card-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.device-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.device-details {
+  margin-top: 10px;
+}
+
+.rental-price {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.availability {
+  font-size: 14px;
+  color: #666;
+}

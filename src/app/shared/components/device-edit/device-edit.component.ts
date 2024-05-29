@@ -42,6 +42,12 @@ export class DeviceEditComponent implements OnInit {
       const updatedDevice: Device = {
         id: this.device.id,
         name: this.deviceForm.get('name')!.value,
+        imageUrl: this.device.imageUrl,
+        description: this.device.description,
+        category: this.device.category,
+        rentalPrice: this.device.rentalPrice,
+        availableFrom: this.device.availableFrom,
+        availableTo: this.device.availableTo,
         status: this.deviceForm.get('status')!.value
       };
 

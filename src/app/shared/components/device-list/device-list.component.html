@@ -59,11 +59,11 @@
               <span> por dia </span>
             </div>
             <p *ngIf="device.availableTo" class="availability">
-              Disponível de {{ device.availableFrom | date : "shortDate" }} a
-              {{ device.availableTo | date : "shortDate" }}
+              Disponível de {{ device.availableFrom | date : "dd/MM/yyyy" }} a
+              {{ device.availableTo | date : "dd/MM/yyyy" }}
             </p>
             <p *ngIf="!device.availableTo" class="availability">
-              Disponível desde {{ device.availableFrom | date : "shortDate" }}
+              Disponível desde {{ device.availableFrom | date : "dd/MM/yyyy" }}
             </p>
           </div>
         </div>

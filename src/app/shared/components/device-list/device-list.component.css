@@ -7,6 +7,19 @@
   margin-bottom: 20px;
 }
 
+.filters {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
 .page-title {
   font-size: 24px;
   font-weight: bold;
@@ -41,10 +54,32 @@
 
 .rental-price {
   font-size: 16px;
-  margin-bottom: 5px;
+  color: #e91e63;
+  font-weight: bold;
 }
 
 .availability {
   font-size: 14px;
   color: #666;
+}
+
+mat-card-subtitle {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  margin-top: 8px;
+}
+
+.available {
+  background-color: #4caf50;
+
+}
+
+.rented {
+  background-color: #f44336;
+}
+
+.maintenance {
+  background-color: #ff9800;
 }

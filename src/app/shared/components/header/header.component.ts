@@ -38,6 +38,9 @@ export class HeaderComponent {
 
     dialogRef.afterClosed().subscribe(() => {
       this.checkUserAuthentication();
+      if (this.isUserAuthenticated) {
+        window.location.reload();
+      }
     });
   }
 

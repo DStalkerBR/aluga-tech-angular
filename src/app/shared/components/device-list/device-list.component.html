@@ -1,8 +1,30 @@
 <div class="container">
   <h2 class="page-title">Dispositivos Disponíveis para Aluguel</h2>
 
+  <div class="filters">
+    <mat-form-field class="search-field">
+      <mat-label>Pesquisar Dispositivo</mat-label>
+      <input
+        matInput
+        (input)="onNameFilterInput($event)"
+        placeholder="Nome do dispositivo"
+      />
+    </mat-form-field>
+
+    <mat-button-toggle-group
+      [(ngModel)]="statusFilter"
+      (change)="applyStatusFilter($event.value)"
+      exclusive
+    >
+      <mat-button-toggle value="all">Todos</mat-button-toggle>
+      <mat-button-toggle value="available">Disponíveis</mat-button-toggle>
+      <mat-button-toggle value="rented">Alugados</mat-button-toggle>
+      <mat-button-toggle value="maintenance">Em Manutenção</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
   <div class="device-list">
-    <mat-card *ngFor="let device of devices" class="device-card">
+    <mat-card *ngFor="let device of filteredDevices" class="device-card">
       <img
         mat-card-image
         class="card-image"
@@ -13,11 +35,25 @@
         <div class="device-info">
           <mat-card-header>
             <mat-card-title>{{ device.name }}</mat-card-title>
-            <mat-card-subtitle>{{ device.status }}</mat-card-subtitle>
+            <mat-card-subtitle
+              [ngClass]="{
+                available: device.status === 'available',
+                rented: device.status === 'rented',
+                maintenance: device.status === 'maintenance'
+              }"
+            >
+              {{
+                device.status === "available"
+                  ? "Disponível"
+                  : device.status === "rented"
+                  ? "Alugado"
+                  : "Em Manutenção"
+              }}
+            </mat-card-subtitle>
           </mat-card-header>
           <div class="device-details">
             <p class="rental-price">
-              Preço de Aluguel: R$ {{ device.rentalPrice.toFixed(2) }}
+              Aluguel: R$ {{ device.rentalPrice.toFixed(2) }}
             </p>
             <p *ngIf="device.availableTo" class="availability">
               Disponível de {{ device.availableFrom | date : "shortDate" }} a

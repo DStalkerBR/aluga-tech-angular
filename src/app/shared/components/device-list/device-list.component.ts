@@ -7,14 +7,22 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-device-list',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonToggleModule,
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
@@ -24,18 +32,47 @@ import { MatGridListModule } from '@angular/material/grid-list';
 })
 export class DeviceListComponent implements OnInit {
   devices: Device[] = [];
+  filteredDevices: Device[] = [];
+  statusFilter: string = 'all';
+  nameFilter: string = '';
 
   constructor(private deviceService: DeviceService, private router: Router) {}
 
   ngOnInit(): void {
     this.deviceService.getDevices().subscribe((devices: Device[]) => {
       this.devices = devices;
+      this.filteredDevices = devices;
     });
   }
 
   deleteDevice(id: string): void {
     this.deviceService.deleteDevice(id).subscribe(() => {
       this.devices = this.devices.filter((device) => device.id !== id);
+      this.filterDevices();
+    });
+  }
+
+  onNameFilterInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.applyNameFilter(inputElement.value);
+  }
+
+  applyNameFilter(name: string): void {
+    this.nameFilter = name.toLowerCase();
+    this.filterDevices();
+  }
+
+  applyStatusFilter(status: string): void {
+    this.statusFilter = status;
+    this.filterDevices();
+  }
+
+  filterDevices(): void {
+    this.filteredDevices = this.devices.filter((device) => {
+      const matchesName = device.name.toLowerCase().includes(this.nameFilter);
+      const matchesStatus =
+        this.statusFilter === 'all' || device.status === this.statusFilter;
+      return matchesName && matchesStatus;
     });
   }
 
@@ -57,7 +94,7 @@ export class DeviceListComponent implements OnInit {
     this.deviceService.addDevice(device).subscribe((id: any) => {
       device.id = id.name;
       this.devices.push(device);
-      console.log('Device added:', device);
+      this.filterDevices();
     });
   }
 }

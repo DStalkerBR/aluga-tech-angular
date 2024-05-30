@@ -1,22 +1,80 @@
-<div *ngIf="device">
-    <h2>Editando {{ device.name }}</h2>
-    <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="id">ID</label>
-        <input id="id" formControlName="id" [disabled]="true" />
-      </div>
-      <div>
-        <label for="name">Nome</label>
-        <input id="name" formControlName="name" />
-      </div>
-      <div>
-        <label for="status">Status</label>
-        <select id="status" formControlName="status">
-          <option value="available">Available</option>
-          <option value="rented">Rented</option>
-        </select>
-      </div>
-      <button type="submit">Salvar</button>
-      <button type="button" (click)="goBack()">Cancelar</button>
-    </form>
-  </div>
+<mat-card *ngIf="device" class="edit-card">
+  <mat-card-title>Editando {{ device.name }}</mat-card-title>
+  <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" [disabled]="true" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="deviceForm.get('name')?.hasError('required')">
+        Nome é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>URL da Imagem</mat-label>
+      <input matInput formControlName="imageUrl" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      <mat-error *ngIf="deviceForm.get('description')?.hasError('required')">
+        Descrição é obrigatória
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Categoria</mat-label>
+      <input matInput formControlName="category" />
+      <mat-error *ngIf="deviceForm.get('category')?.hasError('required')">
+        Categoria é obrigatória
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Preço de Aluguel</mat-label>
+      <input matInput formControlName="rentalPrice" type="number" />
+      <mat-error *ngIf="deviceForm.get('rentalPrice')?.hasError('required')">
+        Preço de aluguel é obrigatório
+      </mat-error>
+      <mat-error *ngIf="deviceForm.get('rentalPrice')?.hasError('min')">
+        Preço deve ser maior que zero
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Disponível de</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker1"
+        formControlName="availableFrom"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="deviceForm.get('availableFrom')?.hasError('required')">
+        Data de início é obrigatória
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Disponível até</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="availableTo" />
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="available">Disponível</mat-option>
+        <mat-option value="rented">Alugado</mat-option>
+        <mat-option value="maintenance">Em Manutenção</mat-option>
+      </mat-select>
+      <mat-error *ngIf="deviceForm.get('status')?.hasError('required')">
+        Status é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+      <button mat-raised-button color="warn" type="button" (click)="goBack()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</mat-card>

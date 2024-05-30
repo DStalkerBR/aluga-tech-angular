@@ -17,6 +17,13 @@
   object-fit: cover;
 }
 
+.details-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
 .details-header {
   flex: 1;
 }
@@ -32,7 +39,7 @@
 }
 
 .available {
-  background-color: #4caf50; /* Verde para Disponível */
+  background-color: #4caf50;
 }
 
 .rented {
@@ -47,6 +54,7 @@
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 5px;
+  color: #333;
 }
 
 .available-dates {
@@ -65,15 +73,23 @@
 }
 
 .actions {
-  margin-top: auto;
+  margin-top: 25%;
   display: flex;
   justify-content: flex-end;
 }
 
 button {
   margin-right: 10px;
+  width: 150px;
 }
 
 button:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }

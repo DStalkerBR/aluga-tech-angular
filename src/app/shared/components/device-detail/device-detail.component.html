@@ -16,6 +16,9 @@
             {{ device.name }}
           </div>
         </mat-card-title>
+        <mat-card-subtitle>
+          {{ device.category }}
+        </mat-card-subtitle>
         <div class="details-info">
           <div
             class="details-item status"
@@ -34,13 +37,35 @@
             }}
           </div>
           <div class="details-item rental-price">
-            R$ {{ device.rentalPrice.toFixed(2) }}
+            {{ device.rentalPrice | currency : "BRL" : "symbol" : "1.2-2" }}
+            <mat-card-subtitle> por dia </mat-card-subtitle>
           </div>
           <div class="details-item available-dates">
             <span>Disponível:</span>
             <span>{{ device.availableFrom | date : "dd/MM/yyyy" }}</span>
             <span>até</span>
             <span>{{ device.availableTo | date : "dd/MM/yyyy" }}</span>
+          </div>
+          <div class="total">
+            <mat-form-field>
+              <mat-label>Dias</mat-label>
+              <mat-select
+                [(ngModel)]="selectedDays"
+                (selectionChange)="updateDays()"
+              >
+                <mat-option
+                  *ngFor="let option of daysOptions"
+                  [value]="option"
+                  >{{ option }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <div class="total-value">
+              <label>Total </label>
+              <span>{{
+                subTotalSignal() | currency : "BRL" : "symbol" : "1.2-2"
+              }}</span>
+            </div>
           </div>
           <div class="actions">
             <mat-card-actions>
@@ -51,7 +76,7 @@
                 *ngIf="device.status === 'available'"
                 mat-flat-button
                 color="accent"
-                (click)="goBack()"
+                (click)="rentDevice()"
               >
                 Alugar
               </button>

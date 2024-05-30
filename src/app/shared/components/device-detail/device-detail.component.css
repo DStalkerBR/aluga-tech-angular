@@ -21,7 +21,6 @@
   font-size: 24px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 20px;
 }
 
 .details-header {
@@ -51,6 +50,8 @@
 }
 
 .rental-price {
+  display: flex;
+  justify-content: space-between;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 5px;
@@ -73,7 +74,7 @@
 }
 
 .actions {
-  margin-top: 25%;
+  margin-bottom: 10%;
   display: flex;
   justify-content: flex-end;
 }
@@ -92,4 +93,33 @@ button:hover {
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.total {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+mat-form-field {
+  width: 30%;
+  height: 30%;
+}
+
+.total mat-select {
+  width: 100%;
+}
+
+.total-value {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #6b9dc7;
+  margin-top: 10px;
+}
+
+.total-value > label {
+  font-weight: normal;
+  font-size: 10px;
+  color: #333;
 }

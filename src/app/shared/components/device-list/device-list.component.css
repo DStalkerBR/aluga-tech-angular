@@ -53,9 +53,18 @@ mat-form-field {
 }
 
 .rental-price {
+  display: flex;
+  gap: 10px;
+}
+
+.rental-price > p {
   font-size: 16px;
   color: #e91e63;
   font-weight: bold;
+}
+
+.rental-price span {
+  color: #acacac;
 }
 
 .availability {
@@ -73,7 +82,6 @@ mat-card-subtitle {
 
 .available {
   background-color: #4caf50;
-
 }
 
 .rented {

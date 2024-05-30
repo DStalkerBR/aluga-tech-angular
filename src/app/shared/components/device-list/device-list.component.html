@@ -52,9 +52,12 @@
             </mat-card-subtitle>
           </mat-card-header>
           <div class="device-details">
-            <p class="rental-price">
-              Aluguel: R$ {{ device.rentalPrice.toFixed(2) }}
-            </p>
+            <div class="rental-price">
+              <p>
+                {{ device.rentalPrice | currency : "BRL" : "symbol" : "1.2-2" }}
+              </p>
+              <span> por dia </span>
+            </div>
             <p *ngIf="device.availableTo" class="availability">
               Disponível de {{ device.availableFrom | date : "shortDate" }} a
               {{ device.availableTo | date : "shortDate" }}
